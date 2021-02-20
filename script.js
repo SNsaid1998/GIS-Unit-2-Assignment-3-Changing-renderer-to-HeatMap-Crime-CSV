@@ -14,19 +14,22 @@
     ) {
       
 
-var url = "https://raw.githubusercontent.com/gbrunner/Advanced_Python_for_GIS_and_RS/master/Week%202/stl_crime_wgs_84.csv";
+var url = "https://raw.githubusercontent.com/gbrunner/Advanced_Python_for_GIS_and_RS/master/Week%202/stl_crime_wgs_84.csv"
      esriConfig.request.corsEnabledServers.push('https://rawgit.com');
 
-        const template = {
-          title: "Saint Louis City Crime CSV Layer",
-          content: "Feature Layer, Crime CSV"
-        };
+const template = {
+   title: "Crime committed at {ILEADSStreet}"
+};
 
-        const csvLayer = new CSVLayer({
-          url: url,
-          copyright: "STL CRIME CSV",
-          popupTemplate: template
-        });
+const layer = new CSVLayer({
+        url: url,
+        title: "St. Louis Crime Heatmap",
+        copyright: "St. Louis Police Department",
+		latitudeField:"Lat",
+        longitudeField:"Lon",
+		popupTemplate: template,
+		renderer: renderer
+});
 
         var symbol = {
           type: "simple-marker", 
