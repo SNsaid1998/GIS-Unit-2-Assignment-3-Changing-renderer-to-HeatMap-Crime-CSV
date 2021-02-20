@@ -1,4 +1,4 @@
-    require([
+require([
       "esri/Map",
       "esri/layers/CSVLayer",
       "esri/views/MapView",
@@ -12,31 +12,27 @@
       esriConfig,
       urlUtils
     ) {
-      
 
-var url = "https://raw.githubusercontent.com/gbrunner/Advanced_Python_for_GIS_and_RS/master/Week%202/stl_crime_wgs_84.csv"
+    var url = "https://raw.githubusercontent.com/gbrunner/Advanced_Python_for_GIS_and_RS/master/Week%202/stl_crime_wgs_84.csv"
      esriConfig.request.corsEnabledServers.push('https://rawgit.com');
 
-const template = {
+ 
+     const template = {
    title: "Crime committed at {ILEADSStreet}"
 };
 
-const layer = new CSVLayer({
-        url: url,
-        title: "St. Louis Crime Heatmap",
-        copyright: "St. Louis Police Department",
-		latitudeField:"Lat",
+        const csvLayer = new CSVLayer({
+          url: url,
+          title: "St. Louis Crime Heatmap",
+          copyright: "St. Louis Police Department", 
+          latitudeField:"Lat",
         longitudeField:"Lon",
-		popupTemplate: template,
-		renderer: renderer
-});
+          popupTemplate: template
 
-        var symbol = {
-          type: "simple-marker", 
-          color:"red"
-        };
- csvLayer.renderer = {
-        type: "heatmap", 
+        });
+
+      csvLayer.renderer = {
+        type: "heatmap",
         colorStops: [
             { color: "rgba(63, 40, 102, 0)", ratio: 0 },
             { color: "#9C33FF", ratio: 0.083 },
@@ -57,13 +53,13 @@ const layer = new CSVLayer({
       };
 
       var map = new Map({
-        basemap: "gray",
+        basemap: "dark-gray",
         layers: [csvLayer]
       });
 
       var view = new MapView({
         container: "viewDiv",
-        center: [-90.25, 38.65],
+        center: [-90.1994, 38.6270],
         zoom: 12,
         map: map
       });
